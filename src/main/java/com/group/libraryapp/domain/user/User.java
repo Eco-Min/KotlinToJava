@@ -1,7 +1,6 @@
 package com.group.libraryapp.domain.user;
 
-import com.group.libraryapp.domain.book.Book;
-import com.group.libraryapp.domain.book.JavaBook;
+import com.group.libraryapp.domain.Book;
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
 
 import javax.persistence.*;
@@ -30,7 +29,7 @@ public class User {
   }
 
   public User(String name, Integer age) {
-    if (name.isBlank()) {
+    if (name.isEmpty()) {
       throw new IllegalArgumentException("이름은 비어 있을 수 없습니다");
     }
     this.name = name;

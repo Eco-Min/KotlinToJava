@@ -22,8 +22,8 @@ public class JavaBook {
   }
 
   public JavaBook(String name) {
-    if (name.isBlank()) {
-      throw new IllegalArgumentException("이름은 비어 있을 수 없습니다");
+    if (name.isEmpty()) {
+      throw new IllegalArgumentException("이름은 비어있을 수 없습니다.");
     }
     this.name = name;
   }
