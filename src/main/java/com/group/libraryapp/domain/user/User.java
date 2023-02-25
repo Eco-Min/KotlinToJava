@@ -1,6 +1,6 @@
 package com.group.libraryapp.domain.user;
 
-import com.group.libraryapp.domain.book.Book;
+import com.group.libraryapp.domain.book.JavaBook;
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
 
 import javax.persistence.*;
@@ -40,8 +40,8 @@ public class User {
     this.name = name;
   }
 
-  public void loanBook(Book book) {
-    this.userLoanHistories.add(new UserLoanHistory(this, book.getName(), false));
+  public void loanBook(JavaBook javaBook) {
+    this.userLoanHistories.add(new UserLoanHistory(this, javaBook.getName(), false));
   }
 
   public void returnBook(String bookName) {
