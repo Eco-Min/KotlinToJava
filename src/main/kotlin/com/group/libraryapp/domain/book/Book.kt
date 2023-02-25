@@ -8,12 +8,12 @@ import javax.persistence.Id
 
 @Entity
 class Book(
+    @Column(nullable = false)
+    val name: String,
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
-
-    @Column(nullable = false)
-    val name: String
+    val id: Long? = null
 
 ){
     init {
