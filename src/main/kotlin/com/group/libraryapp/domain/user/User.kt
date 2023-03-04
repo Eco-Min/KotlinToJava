@@ -9,7 +9,7 @@ class User(
     @Column(nullable = false)
     var name: String,
 
-    val age: Int,
+    val age: Int?,
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
     val userLoanHistory: MutableList<UserLoanHistory> = mutableListOf(),
