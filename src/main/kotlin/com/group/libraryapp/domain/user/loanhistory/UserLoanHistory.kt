@@ -12,7 +12,6 @@ class UserLoanHistory {
     @ManyToOne
     private var user: User? = null
     var bookName: String? = null
-        private set
     private var isReturn = false
 
     constructor()
