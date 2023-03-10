@@ -4,23 +4,15 @@ import com.group.libraryapp.domain.user.User
 import javax.persistence.*
 
 @Entity
-class UserLoanHistory {
+class UserLoanHistory (
+    @ManyToOne
+    val user: User,
+    val bookName: String,
+    var isReturn : Boolean = false,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long? = null
-
-    @ManyToOne
-    private var user: User? = null
-    var bookName: String? = null
-    private var isReturn = false
-
-    constructor()
-    constructor(user: User?, bookName: String?, isReturn: Boolean) {
-        this.user = user
-        this.bookName = bookName
-        this.isReturn = isReturn
-    }
-
+    val id: Long? = null
+    ){
     fun doReturn() {
         isReturn = true
     }

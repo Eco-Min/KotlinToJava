@@ -8,22 +8,20 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class BookController private constructor(val bookService: BookService) {
-
+class BookController private constructor(
+    val bookService: BookService) {
     @PostMapping("/book")
-    fun saveBook(@RequestBody request: BookRequest?) {
-        if (request != null) {
-            bookService.saveBook(request)
-        }
+    fun saveBook(@RequestBody request: BookRequest) {
+        bookService.saveBook(request)
     }
 
     @PostMapping("/book/loan")
-    fun loanBook(@RequestBody request: BookLoanRequest?) {
+    fun loanBook(@RequestBody request: BookLoanRequest) {
         bookService.loanBook(request)
     }
 
     @PutMapping("/book/return")
-    fun returnBook(@RequestBody request: BookReturnRequest?) {
+    fun returnBook(@RequestBody request: BookReturnRequest) {
         bookService.returnBook(request)
     }
 }
