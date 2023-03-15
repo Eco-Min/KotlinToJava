@@ -9,10 +9,11 @@ class User (
     var name: String,
 
     var age : Int,
-
+    @Enumerated(EnumType.STRING)
+    val status: UserStatus,
 ){
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
-    private val userLoanHistories: MutableList<UserLoanHistory> = mutableListOf()
+    val userLoanHistories: MutableList<UserLoanHistory> = mutableListOf()
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
