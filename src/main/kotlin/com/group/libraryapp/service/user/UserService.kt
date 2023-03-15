@@ -4,6 +4,8 @@ import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import com.group.libraryapp.dto.user.request.UserUpdateRequest
+import com.group.libraryapp.dto.user.response.BookHistoryResponse
+import com.group.libraryapp.dto.user.response.UserLoanResponse
 import com.group.libraryapp.dto.user.response.UserResponse
 import com.group.libraryapp.util.fail
 import org.springframework.beans.factory.annotation.Autowired
@@ -37,6 +39,17 @@ class UserService @Autowired constructor(
     fun deleteUser(name: String) {
         val user = userRepository.findByName(name) ?: fail()
         userRepository.delete(user)
+    }
+
+    fun getUserLoanHistory(): List<UserLoanResponse> {
+        return userRepository.findAll().map { user ->
+            UserLoanResponse(
+                name = user.name,
+                books = user.userLoanHistory.map { history ->
+                    BookHistoryResponse(history.bookName, history.isReturn)
+                }
+            )
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
+import com.group.libraryapp.dto.book.response.EachBookTypeResponse
 import com.group.libraryapp.util.fail
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -39,5 +40,14 @@ class BookService @Autowired constructor(
     @Transactional
     fun returnBook(request: BookReturnRequest) {
         userRepository.findByName(request.userName)?: fail()
+    }
+
+    fun nowLoanBook(): Int {
+        return userLoanHistoryRepository.findAllByIsReturn(false).size
+    }
+
+    fun countEachTypeBook(): List<EachBookTypeResponse> {
+        return bookRepository.findAll().groupBy { book -> book.type }
+            .map { (type, books) -> EachBookTypeResponse(type, books.size)}
     }
 }
