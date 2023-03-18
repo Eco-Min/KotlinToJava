@@ -42,14 +42,19 @@ class UserService @Autowired constructor(
     }
 
     fun getUserLoanHistory(): List<UserLoanResponse> {
-        return userRepository.findAll().map { user ->
+        /*return userRepository.findAll().map { user ->
             UserLoanResponse(
                 name = user.name,
                 books = user.userLoanHistory.map { history ->
                     BookHistoryResponse(history.bookName, history.isReturn)
                 }
             )
-        }
+        }*/
+        return userRepository.findAllUserHistory()
+    }
+
+    fun getTest(): List<BookHistoryResponse>{
+        return userRepository.test()
     }
 
 }
