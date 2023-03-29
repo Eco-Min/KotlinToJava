@@ -4,8 +4,8 @@ import com.group.libraryapp.domain.user.QUser.user
 import com.group.libraryapp.domain.user.loanhistory.QUserLoanHistory.userLoanHistory
 import com.group.libraryapp.dto.user.response.BookHistoryResponse
 import com.group.libraryapp.dto.user.response.UserLoanResponse
-import com.querydsl.core.group.GroupBy
 import com.querydsl.core.group.GroupBy.groupBy
+import com.querydsl.core.group.GroupBy.list
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 
@@ -18,7 +18,7 @@ class UserRepositoryCustomImpl(private val queryFactory: JPAQueryFactory) : User
                     Projections.constructor(
                         UserLoanResponse::class.java,
                         user.name,
-                        GroupBy.list(
+                        list(
                             Projections.constructor(
                                 BookHistoryResponse::class.java,
                                 userLoanHistory.bookName,
@@ -37,8 +37,7 @@ class UserRepositoryCustomImpl(private val queryFactory: JPAQueryFactory) : User
                 userLoanHistory.bookName,
                 userLoanHistory.isReturn
             )
-        )
-            .from(userLoanHistory)
+        ).from(userLoanHistory)
             .fetch()
     }
 }
